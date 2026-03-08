@@ -1,5 +1,6 @@
 {% from "article.css.j2" import article_css %}<!DOCTYPE html>
-<html {% if page_direction %} dir="{{ page_direction }}"{% endif %}{% if page_language %} lang={{ page_language }}{% endif %} prefix="og: https://ogp.me/ns#">
+<html {% if page_direction %} dir="{{ page_direction }}"{% endif %}{% if page_language %} lang="{{ page_language }}"{% endif %} prefix="og: https://ogp.me/ns#">
+<base href="{{ article_url }}" />
 <head>
     <meta charset="utf-8">
     <title>{{ article_title }}</title>
