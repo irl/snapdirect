@@ -23,8 +23,8 @@ msgstr ""
 
 #: src/snapshots/templates/article-template.html.j2:73
 msgid ""
-"This story is a copy of an article from <a href=\"%(site_url)\" class"
-"=\"snap-trust-header__sitelink\">%(site_title)</a>. It is delivered to "
+"This story is a copy of an article from <a href=\"{site_url}\" class"
+"=\"snap-trust-header__sitelink\">{site_title}</a>. It is delivered to "
 "you from a trusted archive to assure its availability over time."
 msgstr ""
 
