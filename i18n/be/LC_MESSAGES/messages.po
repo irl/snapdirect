@@ -1,0 +1,49 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-03-07 17:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: src/snapshots/templates/article-template.html.j2:66
+msgid "How do I know that I can trust this page?"
+msgstr ""
+
+#: src/snapshots/templates/article-template.html.j2:73
+msgid ""
+"This story is a copy of an article from <a href=\"%(site_url)\" class"
+"=\"snap-trust-header__sitelink\">%(site_title)</a>. It is delivered to "
+"you from a trusted archive to assure its availability over time."
+msgstr ""
+
+#: src/snapshots/templates/article-template.html.j2:76
+msgid "View the article source"
+msgstr ""
+
+#: src/snapshots/templates/article-template.html.j2:143
+msgid "You are leaving this page"
+msgstr ""
+
+#: src/snapshots/templates/article-template.html.j2:163
+msgid ""
+"This link will redirect you to an external website. If it’s not available"
+" in your region, you may not be able to access it."
+msgstr ""
+
+#: src/snapshots/templates/article-template.html.j2:165
+msgid "Continue"
+msgstr ""
