@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-07 17:05+0000\n"
 "PO-Revision-Date: 2026-03-08 15:54+0000\n"
-"Last-Translator: Fabiola Maurice <fabiola.mauriceh@gmail.com>\n"
+"Last-Translator: irl <irl@sr2.uk>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/sr2/snapdirect/"
 "es/>\n"
 "Language: es\n"
@@ -21,6 +21,7 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: src/snapshots/templates/article-template.html.j2:66
+#, fuzzy
 msgid "How do I know that I can trust this page?"
 msgstr ""
 "Esto aparece en la parte superior de la página, en una captura de pantalla "
