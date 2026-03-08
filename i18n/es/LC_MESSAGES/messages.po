@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-07 17:05+0000\n"
 "PO-Revision-Date: 2026-03-08 15:54+0000\n"
-"Last-Translator: irl <irl@sr2.uk>\n"
+"Last-Translator: Fabiola Maurice <fabiola.mauriceh@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/sr2/snapdirect/"
 "es/>\n"
 "Language: es\n"
@@ -21,12 +21,8 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: src/snapshots/templates/article-template.html.j2:66
-#, fuzzy
 msgid "How do I know that I can trust this page?"
-msgstr ""
-"Esto aparece en la parte superior de la página, en una captura de pantalla "
-"del artículo. Al hacer clic aquí, se expandirá la sección para mostrar la "
-"respuesta a la pregunta."
+msgstr "¿Cómo sé que puedo confiar en esta página?"
 
 #: src/snapshots/templates/article-template.html.j2:73
 msgid ""
@@ -34,21 +30,27 @@ msgid ""
 "=\"snap-trust-header__sitelink\">%(site_title)</a>. It is delivered to "
 "you from a trusted archive to assure its availability over time."
 msgstr ""
+"Esta historia es una copia de un artículo de <a href=\"%(site_url)\" "
+"class=\"snap-trust-header__sitelink\">%(site_title)</a>. Se la entregamos "
+"desde un archivo confiable para garantizar su disponibilidad a lo largo del "
+"tiempo."
 
 #: src/snapshots/templates/article-template.html.j2:76
 msgid "View the article source"
-msgstr ""
+msgstr "Ver el código fuente del artículo"
 
 #: src/snapshots/templates/article-template.html.j2:143
 msgid "You are leaving this page"
-msgstr ""
+msgstr "Estas abandonando esta pagina"
 
 #: src/snapshots/templates/article-template.html.j2:163
 msgid ""
 "This link will redirect you to an external website. If it’s not available"
 " in your region, you may not be able to access it."
 msgstr ""
+"Este enlace te redirigirá a un sitio web externo. Si no está disponible en "
+"tu región, es posible que no lo puedas acceder."
 
 #: src/snapshots/templates/article-template.html.j2:165
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
