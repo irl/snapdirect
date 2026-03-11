@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# Persian translations for PROJECT.
 # Copyright (C) 2026 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
@@ -7,49 +7,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-07 17:05+0000\n"
+"POT-Creation-Date: 2026-03-11 14:38+0000\n"
 "PO-Revision-Date: 2026-03-09 07:36+0000\n"
 "Last-Translator: irl <irl@sr2.uk>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/sr2/snapdirect/"
-"fa/>\n"
 "Language: fa\n"
+"Language-Team: Persian "
+"<https://hosted.weblate.org/projects/sr2/snapdirect/fa/>\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: src/snapshots/templates/article-template.html.j2:66
 msgid "How do I know that I can trust this page?"
 msgstr "چگونه از امن بودن این صفحه اطمینان حاصل کنم؟"
 
 #: src/snapshots/templates/article-template.html.j2:73
+#, python-brace-format
 msgid ""
 "This story is a copy of an article from <a href=\"{site_url}\" class"
-"=\"snap-trust-header__sitelink\">{site_title}</a>. It is delivered to "
-"you from a trusted archive to assure its availability over time."
+"=\"snap-trust-header__sitelink\">{site_title}</a>. It is delivered to you"
+" from a trusted archive to assure its availability over time."
 msgstr ""
 "این خبر نسخه کپی شده است از <a href=\"{site_url}\" class=\"snap-trust-"
-"header__sitelink\">{site_title}</a>. این از یک آرشیو معتبر به شما تحویل داده "
-"می‌شود تا از در دسترس بودن آن در طول زمان اطمینان حاصل شود."
+"header__sitelink\">{site_title}</a>. این از یک آرشیو معتبر به شما تحویل "
+"داده می‌شود تا از در دسترس بودن آن در طول زمان اطمینان حاصل شود."
 
-#: src/snapshots/templates/article-template.html.j2:76
+#: src/snapshots/templates/article-template.html.j2:75
 msgid "View the article source"
 msgstr "نمایش سورس این آرتیکل"
 
-#: src/snapshots/templates/article-template.html.j2:143
+#: src/snapshots/templates/article-template.html.j2:116
+#, fuzzy
+msgid "View the original article"
+msgstr "نمایش سورس این آرتیکل"
+
+#: src/snapshots/templates/article-template.html.j2:140
 msgid "You are leaving this page"
 msgstr "از این صفحه خارج می‌شوید"
 
-#: src/snapshots/templates/article-template.html.j2:163
+#: src/snapshots/templates/article-template.html.j2:159
 msgid ""
 "This link will redirect you to an external website. If it’s not available"
 " in your region, you may not be able to access it."
 msgstr ""
-"این لینک شما را به یک وب‌سایت خارجی می‌برد. اگر برای کشور شما موجود نباشد شاید "
-"قابل دسترسی نباشد."
+"این لینک شما را به یک وب‌سایت خارجی می‌برد. اگر برای کشور شما موجود نباشد"
+" شاید قابل دسترسی نباشد."
 
-#: src/snapshots/templates/article-template.html.j2:165
+#: src/snapshots/templates/article-template.html.j2:161
 msgid "Continue"
 msgstr "ادامه"
+
