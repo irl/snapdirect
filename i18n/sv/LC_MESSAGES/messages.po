@@ -8,19 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-07 17:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-03-11 14:43+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/sr2/snapdirect/"
+"sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.17-dev\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: src/snapshots/templates/article-template.html.j2:66
 msgid "How do I know that I can trust this page?"
-msgstr ""
+msgstr "Hur vet jag att jag kan lita på den här sidan?"
 
 #: src/snapshots/templates/article-template.html.j2:73
 msgid ""
@@ -28,21 +30,26 @@ msgid ""
 "=\"snap-trust-header__sitelink\">{site_title}</a>. It is delivered to "
 "you from a trusted archive to assure its availability over time."
 msgstr ""
+"Den här artikeln är en kopia av en artikel från <a href=\"{site_url}\" "
+"class=\"snap-trust-header__sitelink\">{site_title}</a>. Den levereras till "
+"dig från ett betrott arkiv för att säkerställa dess tillgänglighet över tid."
 
 #: src/snapshots/templates/article-template.html.j2:76
 msgid "View the article source"
-msgstr ""
+msgstr "Visa artikelns källa"
 
 #: src/snapshots/templates/article-template.html.j2:143
 msgid "You are leaving this page"
-msgstr ""
+msgstr "Du lämnar den här sidan"
 
 #: src/snapshots/templates/article-template.html.j2:163
 msgid ""
 "This link will redirect you to an external website. If it’s not available"
 " in your region, you may not be able to access it."
 msgstr ""
+"Den här länken omdirigerar dig till en extern webbplats. Om den inte är "
+"tillgänglig i din region kanske du inte kan komma åt den."
 
 #: src/snapshots/templates/article-template.html.j2:165
 msgid "Continue"
-msgstr ""
+msgstr "Fortsätt"
