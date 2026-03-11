@@ -38,9 +38,8 @@ msgid "View the article source"
 msgstr "View the article source"
 
 #: src/snapshots/templates/article-template.html.j2:116
-#, fuzzy
 msgid "View the original article"
-msgstr "View the article source"
+msgstr "View the original article"
 
 #: src/snapshots/templates/article-template.html.j2:140
 msgid "You are leaving this page"
