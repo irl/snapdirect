@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-11 14:38+0000\n"
+"POT-Creation-Date: 2026-03-12 06:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/snapshots/templates/article-template.html.j2:66
+#: src/snapshots/templates/article-template.html.j2:59
+msgid "Skip to main content"
+msgstr ""
+
+#: src/snapshots/templates/article-template.html.j2:64
 msgid "How do I know that I can trust this page?"
 msgstr ""
 
-#: src/snapshots/templates/article-template.html.j2:73
+#: src/snapshots/templates/article-template.html.j2:71
 #, python-brace-format
 msgid ""
 "This story is a copy of an article from <a href=\"{site_url}\" class"
@@ -29,25 +33,25 @@ msgid ""
 " from a trusted archive to assure its availability over time."
 msgstr ""
 
-#: src/snapshots/templates/article-template.html.j2:75
+#: src/snapshots/templates/article-template.html.j2:73
 msgid "View the article source"
 msgstr ""
 
-#: src/snapshots/templates/article-template.html.j2:116
+#: src/snapshots/templates/article-template.html.j2:114
 msgid "View the original article"
 msgstr ""
 
-#: src/snapshots/templates/article-template.html.j2:140
+#: src/snapshots/templates/article-template.html.j2:138
 msgid "You are leaving this page"
 msgstr ""
 
-#: src/snapshots/templates/article-template.html.j2:159
+#: src/snapshots/templates/article-template.html.j2:157
 msgid ""
 "This link will redirect you to an external website. If it’s not available"
 " in your region, you may not be able to access it."
 msgstr ""
 
-#: src/snapshots/templates/article-template.html.j2:161
+#: src/snapshots/templates/article-template.html.j2:159
 msgid "Continue"
 msgstr ""
 
