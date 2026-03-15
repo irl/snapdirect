@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-12 06:09+0000\n"
-"PO-Revision-Date: 2026-03-13 14:09+0000\n"
-"Last-Translator: irl <irl@sr2.uk>\n"
+"PO-Revision-Date: 2026-04-05 10:09+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/sr2/snapdirect/"
 "sv/>\n"
 "Language: sv\n"
@@ -45,9 +45,8 @@ msgid "View the article source"
 msgstr "Visa artikelns källa"
 
 #: src/snapshots/templates/article-template.html.j2:114
-#, fuzzy
 msgid "View the original article"
-msgstr "Visa originalartikeln"
+msgstr "Visa originalartikel"
 
 #: src/snapshots/templates/article-template.html.j2:138
 msgid "You are leaving this page"
