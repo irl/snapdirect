@@ -1,6 +1,7 @@
 from os.path import abspath, dirname, join
 from typing import Any
 
+from pydantic import PostgresDsn
 from pydantic_settings import (
     BaseSettings,
     SettingsConfigDict,
@@ -34,17 +35,25 @@ class CustomBaseSettings(BaseSettings):
 
 
 class Config(CustomBaseSettings):
-    # DATABASE_URL: PostgresDsn
-    # DATABASE_ASYNC_URL: PostgresDsn
-    # DATABASE_POOL_SIZE: int = 16
-    # DATABASE_POOL_TTL: int = 60 * 20  # 20 minutes
-    # DATABASE_POOL_PRE_PING: bool = True
+    DATABASE_URL: PostgresDsn
+    DATABASE_POOL_SIZE: int = 16
+    DATABASE_POOL_TTL: int = 60 * 20  # 20 minutes
+    DATABASE_POOL_PRE_PING: bool = True
 
     ENVIRONMENT: Environment = Environment.PRODUCTION
 
     CORS_ORIGINS: list[str] = ["*"]
     CORS_ORIGINS_REGEX: str | None = None
     CORS_HEADERS: list[str] = ["*"]
+
+    API_DOMAIN: str
+    LINK_DOMAIN: str
+    INVALID_URL: str
+
+    HASH_SECRET_KEY: str
+
+    MATOMO_HOST: str
+    MATOMO_SITE_ID: int
 
     APP_VERSION: str = "0.0.0"
 

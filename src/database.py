@@ -1,9 +1,11 @@
-import contextlib
-from typing import Annotated, Iterator, Generator
+from contextlib import contextmanager
+from typing import Annotated, Generator
 
 from fastapi import Depends
 from sqlalchemy import (
-    MetaData, create_engine, Connection,
+    MetaData,
+    create_engine,
+    Connection,
 )
 from sqlalchemy.orm import sessionmaker, Session
 
@@ -20,8 +22,8 @@ metadata = MetaData(naming_convention=DB_NAMING_CONVENTION)
 sm = sessionmaker(autocommit=False, expire_on_commit=False, bind=engine)
 
 
-@contextlib.contextmanager
-def get_db_connection() -> Iterator[Connection]:
+@contextmanager
+def get_db_connection() -> Generator[Connection, None, None]:
     with engine.connect() as connection:
         try:
             yield connection
@@ -30,8 +32,8 @@ def get_db_connection() -> Iterator[Connection]:
             raise
 
 
-@contextlib.contextmanager
-def get_db_session() -> Iterator[Session]:
+@contextmanager
+def get_db_session() -> Generator[Session, None, None]:
     session = sm()
     try:
         yield session

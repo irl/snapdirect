@@ -1,9 +1,8 @@
 {% from "article.css.j2" import article_css %}<!DOCTYPE html>
 <html {% if page_direction %} dir="{{ page_direction }}"{% endif %}{% if page_language %} lang="{{ page_language }}"{% endif %} prefix="og: https://ogp.me/ns#">
-<base href="{{ article_url }}" />
 <head>
     <meta charset="utf-8">
-    <title>{{ article_title }}</title>
+    <title>{{ article_title.strip() }}</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
@@ -12,7 +11,7 @@
     <meta name="HandheldFriendly" content="True"/>
 
     <meta property="og:type" content="article"/>
-    <meta property="og:title" content="{{ article_title }}"/>
+    <meta property="og:title" content="{{ article_title.strip() }}"/>
     <meta property="og:site_name" content="{{ site_title }}"/>
     <meta property="og:url" content="{{ article_url }}"/>
     {% if article_image_source %}
@@ -20,9 +19,7 @@
     {% endif %}
     <meta name="twitter:card" content="summary_large_image"/>
     {% if article_author %}<meta property="article:author" content="{{ article_author }}"/>{% endif %}
-
-    {% if noindex %}<meta name="robots" content="noindex" />{% endif %}
-
+    <meta name="robots" content="noindex" />
     {% if site_favicon %}
         <link rel="icon" href="{{ site_favicon }}" />
     {% endif %}
@@ -47,19 +44,36 @@
             let target = e.target.closest("a");
             if (target) {
                 // if the click was on or within an <a>
-                if (!target.href.includes("cloudfront.net") &&
-                        !target.href.includes("azureedge.net") &&
-                        !target.href.includes("global.ssl.fastly.net")) {
+                if (!target.className.includes("snap-skip-link") &&
+                        !target.className.includes("snap-link--mirror") &&
+                        !target.className.includes("snap-link--snapshot")) {
                     e.preventDefault();
                     document.body.dataset.currentLink = target.href;
                 }
             }
         });
+
+        var _paq = window._paq = window._paq || [];
+        var p = "{{ article_url }}";
+        _paq.push(["setCustomUrl", p]);
+        _paq.push(["setExcludedQueryParams", ["roomName", "account", "accountnum", "address", "address1", "address2", "address3", "addressline1", "addressline2", "adres", "adresse", "age", "alter", "auth", "authpw", "bic", "billingaddress", "billingaddress1", "billingaddress2", "calle", "cardnumber", "cc", "ccc", "cccsc", "cccvc", "cccvv", "ccexpiry", "ccexpmonth", "ccexpyear", "ccname", "ccnumber", "cctype", "cell", "cellphone", "city", "clientid", "clientsecret", "company", "consumerkey", "consumersecret", "contrasenya", "contrase\u00f1a", "creditcard", "creditcardnumber", "cvc", "cvv", "dateofbirth", "debitcard", "direcci\u00f3n", "dob", "domain", "ebost", "email", "emailaddress", "emailadresse", "epos", "epost", "eposta", "exp", "familyname", "firma", "firstname", "formlogin", "fullname", "gender", "geschlecht", "gst", "gstnumber", "handynummer", "has\u0142o", "heslo", "iban", "ibanaccountnum", "ibanaccountnumber", "id", "identifier", "indirizzo", "kartakredytowa", "kennwort", "keyconsumerkey", "keyconsumersecret", "konto", "kontonr", "kontonummer", "kredietkaart", "kreditkarte", "kreditkort", "lastname", "login", "mail", "mobiili", "mobile", "mobilne", "nachname", "name", "nickname", "false", "osoite", "parole", "pass", "passord", "password", "passwort", "pasword", "paswort", "paword", "phone", "pin", "plz", "postalcode", "postcode", "postleitzahl", "privatekey", "publickey", "pw", "pwd", "pword", "pwrd", "rue", "secret", "secretq", "secretquestion", "shippingaddress", "shippingaddress1", "shippingaddress2", "socialsec", "socialsecuritynumber", "socsec", "sokak", "ssn", "steuernummer", "strasse", "street", "surname", "swift", "tax", "taxnumber", "tel", "telefon", "telefonnr", "telefonnummer", "telefono", "telephone", "token", "token_auth", "tokenauth", "t\u00e9l\u00e9phone", "ulica", "user", "username", "vat", "vatnumber", "via", "vorname", "wachtwoord", "wagwoord", "webhooksecret", "website", "zip", "zipcode"]]);
+        _paq.push(["trackPageView", p]);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//{{ matomo_host }}/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '{{ matomo_site_id }}']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true;
+            g.src = u + 'matomo.js';
+            s.parentNode.insertBefore(g, s);
+  })();
+
     </script>
 </head>
 <body>
 <div class="snap-wrapper">
-    <a href="#snap-main" class="snap-skip-link">Skip to main content</a>
+    <a href="#snap-main" class="snap-skip-link">{{  gettext("Skip to main content") }}</a>
 
     <details class="snap-trust-header">
             <summary class="snap-trust-header__header">
@@ -89,14 +103,14 @@
 
     <header class="snap-page-header">
             <nav class="snap-page-header-nav">
-                {% if article_mirror_url %}<a href="{{ article_mirror_url }}">{% endif %}
+                {% if site_mirror_url %}<a href="{{ site_mirror_url }}" class="snap-link--mirror">{% endif %}
                     <img src="{{ site_logo }}" alt="{{ site_title }}" class="snap-page-header-logo">
-                {% if article_mirror_url %}</a>{% endif %}
+                {% if site_mirror_url %}</a>{% endif %}
             </nav>
     </header>
     <main id="snap-main">
             <header class="snap-article-header">
-                <h1>{{ article_title }}</h1>
+                <h1>{{ article_title.strip() }}</h1>
                 <div class="snap-byline">
                     {{ article_published }} - {{ site_title }}
                 </div>
@@ -113,8 +127,8 @@
                 {{ article_body }}
                 {% if article_mirror_url %}
                 <p>
-                    <a href="{{ article_mirror_url }}" class="snap-footer-link">
-                        View the original article
+                    <a href="{{ article_mirror_url }}" class="snap-footer-link snap-link--mirror">
+                        {{ gettext("View the original article") }}
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19.7212 13.0822C19.3072 13.0822 18.9712 13.4189 18.9712 13.8322V18.9712H5.02881V5.02881H10.167C10.5818 5.02881 10.917 4.69279 10.917 4.27881C10.917 3.86483 10.5818 3.52881 10.167 3.52881H4.27881C3.86405 3.52881 3.52881 3.86483 3.52881 4.27881V19.7212C3.52881 20.136 3.86405 20.4712 4.27881 20.4712H19.7212C20.136 20.4712 20.4712 20.136 20.4712 19.7212V13.8322C20.4712 13.4197 20.136 13.0822 19.7212 13.0822Z"
                                   fill="#222F3A"></path>
@@ -128,7 +142,7 @@
         </main>
         <footer class="snap-footer">
                 <div>
-                    {% if site_mirror_url %}<a href="https://d7qg4uz16a7xs.cloudfront.net/">{% endif %}
+                    {% if site_mirror_url %}<a href="{{ site_mirror_url }}">{% endif %}
                         <img src="{{ site_logo }}" alt="{{ site_title }} logo">
                     {% if site_mirror_url %}</a>{% endif %}
                 </div>

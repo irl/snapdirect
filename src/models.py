@@ -13,6 +13,7 @@ class CustomBase(DeclarativeBase):
     }
     metadata = metadata
 
+
 class ActivatedMixin:
     active: Mapped[bool] = mapped_column(default=True)
 

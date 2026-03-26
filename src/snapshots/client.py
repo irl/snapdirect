@@ -1,19 +1,24 @@
 import base64
 import copy
 import datetime
-import logging
 import mimetypes
 from typing import Any
 from urllib.parse import urlparse, urlunparse, urljoin
 
+import minify_html
 import requests
 from babel.dates import format_date
 from babel.support import Translations
 from bs4 import BeautifulSoup
 from jinja2 import Environment, PackageLoader, select_autoescape
 
+from src.config import settings
+from src.database import get_db_session
+from src.mirrors.service import resolve_mirror
+from src.pangea.client import pangea_expanded_image_url
 from src.snapshots.config import SnapshotsConfig, config_for_url
 from src.snapshots.schemas import SnapshotContext
+from src.snapshots.service import resolve_snapshot
 
 
 class SnapshotParseError(RuntimeError):
@@ -74,7 +79,7 @@ def fetch_url(base: str, url: str) -> str | None:
         return None
 
 
-class Snapshot:
+class SnapshotCamera:
     config: SnapshotsConfig | None = None
     context: SnapshotContext | None = None
     raw: bytes | None = None
@@ -158,9 +163,29 @@ class Snapshot:
                 element.decompose()
         for image in body.select("img"):
             image.attrs = {
-                "src": fetch_url(self.url, image["src"]),
-                "alt": image["alt"],
+                "src": fetch_url(
+                    pangea_expanded_image_url(self.url),
+                    image.get("src", image.get("data-src", "")),
+                ),
+                "alt": image.get("alt", ""),
             }
+        with get_db_session() as db:
+            for hyperlink in body.select("a"):
+                absolute_url = urljoin(self.url, hyperlink.get("href"))
+                existing_snapshot = resolve_snapshot(db, absolute_url)
+                if existing_snapshot:
+                    hyperlink.attrs.update(
+                        {"href": existing_snapshot, "class": "snap-link--snapshot"}
+                    )
+                    continue
+                mirror_url = resolve_mirror(db, absolute_url)
+                if mirror_url:
+                    hyperlink.attrs.update(
+                        {"href": mirror_url, "class": "snap-link--mirror"}
+                    )
+                    continue
+                hyperlink.attrs.update({"href": absolute_url})
+
         return str(body)
 
     def preprocess(self) -> None:
@@ -173,16 +198,15 @@ class Snapshot:
             element.attrs.pop("style")
 
     def favicon(self):
-        icon = fetch_url(
-            self.url, self.get_attribute_value('link[rel="icon"]', "href", optional=True)
-        )
-        if icon:
+        favicon_src = self.get_attribute_value('link[rel="icon"]', "href", optional=True)
+        if favicon_src:
+            icon = fetch_url(self.url, favicon_src)
             return icon
         parsed = urlparse(self.url)
         icon_url = urlunparse((parsed.scheme, parsed.netloc, "/favicon.ico", "", "", ""))
         return fetch_url(self.url, icon_url)
 
-    def published_time(self, locale: str = "en") -> str:
+    def published_time(self, locale) -> str:
         if self.config.article_published_selector:
             if published := self.get_element_content(
                 self.config.article_published_selector, optional=True
@@ -194,12 +218,28 @@ class Snapshot:
         return format_date(ts, locale=locale)
 
     def parse(self) -> None:
+        if not self.config:
+            self.config = config_for_url(self.url)
+        if not self.config:
+            return
         self.soup = BeautifulSoup(self.raw, "lxml")
         self.preprocess()
-        article_image_source = self.get_attribute_value(
-            self.config.article_image_selector, "src"
-        )
+        if self.config.article_image_selector:
+            article_image_source = self.get_attribute_value(
+                self.config.article_image_selector, "src"
+            )
+            article_image_source = pangea_expanded_image_url(article_image_source)
+        else:
+            article_image_source = None
         page_language = self.get_attribute_value(["html", "body"], "lang", optional=True)
+        site_url = urlunparse(urlparse(self.url)._replace(path="/"))
+        with get_db_session() as db:
+            article_mirror_url = resolve_mirror(db, self.url)
+        site_mirror_url = (
+            urlunparse(urlparse(article_mirror_url)._replace(path="/"))
+            if article_mirror_url
+            else None
+        )
         self.context = SnapshotContext(
             article_author=self.get_element_content(
                 self.config.article_author_selector, optional=True
@@ -208,7 +248,9 @@ class Snapshot:
             article_description=self.get_attribute_value(
                 'meta[name="description"]', "content", optional=True
             ),
-            article_image=fetch_url(self.url, article_image_source),
+            article_image=fetch_url(self.url, article_image_source)
+            if article_image_source
+            else None,
             article_image_caption=self.get_element_content(
                 self.config.article_image_caption_selector, optional=True
             ),
@@ -216,20 +258,25 @@ class Snapshot:
             article_published=self.published_time(page_language),
             article_title=self.get_element_content(self.config.article_title_selector),
             article_url=self.url,
+            article_mirror_url=article_mirror_url,
+            matomo_host=settings.MATOMO_HOST,
+            matomo_site_id=settings.MATOMO_SITE_ID,
             page_direction=self.get_attribute_value(["html", "body"], "dir", optional=True),
             page_language=page_language,
             site_favicon=self.favicon(),
             site_logo=fetch_file(self.config.site_logo),
             site_title=self.config.site_title,
+            site_url=site_url,
+            site_mirror_url=site_mirror_url,
         )
 
-    def get_context(self) -> dict[str, Any]:
-        logging.info("Get content")
-        self.get_content()
-        logging.info("Parse")
-        self.parse()
-        logging.info("Dump")
-        return self.context.model_dump()
+    def get_context(self) -> dict[str, Any] | None:
+        self.config = config_for_url(self.url)
+        if self.config:
+            self.get_content()
+            self.parse()
+            return self.context.model_dump()
+        return None
 
     def render(self) -> str:
         context = self.get_context()
@@ -246,4 +293,6 @@ class Snapshot:
         translations = Translations.load("i18n", [context["page_language"], "en"])
         jinja_env.install_gettext_translations(translations)
         template = jinja_env.get_template("article-template.html.j2")
-        return template.render(**context)
+        return minify_html.minify(
+            template.render(**context), minify_js=True, minify_css=True
+        )

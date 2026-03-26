@@ -144,8 +144,8 @@ figcaption {
   box-sizing: border-box;
   color: #333;
   display: inline-block;
-  max-width: 335px;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   border: 1px solid #e0dfdd;
   border-radius: 4px;
   padding: 16px 24px;
@@ -168,11 +168,19 @@ figcaption {
 }
 
 .snap-footer-link svg {
+    margin-top: 3px;
+}
+
+.snap-footer-link svg:dir(ltr) {
   float: right;
+  margin-left: 10px;
 }
 
 .snap-footer-link:dir(rtl) svg {
   float: left;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  margin-right: 10px;
 }
 
 .snap-footer-link--disabled {
