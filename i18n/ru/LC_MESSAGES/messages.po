@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-12 06:09+0000\n"
 "PO-Revision-Date: 2026-04-05 10:08+0000\n"
-"Last-Translator: irl <irl@sr2.uk>\n"
+"Last-Translator: Aoa Bboe <amberstarfoam@proton.me>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/sr2/snapdirect/"
 "ru/>\n"
 "Language: ru\n"
@@ -42,7 +42,7 @@ msgstr ""
 
 #: src/snapshots/templates/article-template.html.j2:73
 msgid "View the article source"
-msgstr "Перейти к источнику статьи"
+msgstr "Просмотреть источник статьи"
 
 #: src/snapshots/templates/article-template.html.j2:114
 msgid "View the original article"
