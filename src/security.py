@@ -1,3 +1,4 @@
+import secrets
 from typing import Annotated
 
 from fastapi import Depends, Header, HTTPException
@@ -10,7 +11,7 @@ def api_key(host: str = Header(), authorization: str | None = Header(None)) -> b
     if host.lower().strip() != settings.API_DOMAIN.strip():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     try:
-        if authorization.split()[1] == settings.API_KEY:
+        if secrets.compare_digest(authorization.split()[1], settings.API_KEY):
             return True
         return False
     except AttributeError, TypeError, IndexError:
