@@ -50,7 +50,7 @@ msgstr "Ver la fuente del artículo"
 
 #: src/snapshots/templates/article-template.html.j2:138
 msgid "You are leaving this page"
-msgstr "Estas abandonando esta pagina"
+msgstr "Estás abandonando esta pagina"
 
 #: src/snapshots/templates/article-template.html.j2:157
 msgid ""
