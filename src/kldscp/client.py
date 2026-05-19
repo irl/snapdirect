@@ -39,7 +39,7 @@ def get_kaleidoscope_mirror(origin: str) -> str | None:
         "TE": "trailers",
     }
     response = requests.post(
-        "https://kldscpe.info/api/v2/resolve", json=payload, headers=headers
+        "https://kldscpe.info/api/v2/resolve", json=payload, headers=headers, timeout=10
     )
     if response.status_code == 200:
         try:
