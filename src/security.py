@@ -14,7 +14,7 @@ def api_key(host: str = Header(), authorization: str | None = Header(None)) -> b
         if secrets.compare_digest(authorization.split()[1], settings.API_KEY):
             return True
         return False
-    except AttributeError, TypeError, IndexError:
+    except (AttributeError, TypeError, IndexError):
         return False
 
 
