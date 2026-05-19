@@ -44,9 +44,9 @@
             let target = e.target.closest("a");
             if (target) {
                 // if the click was on or within an <a>
-                if (!target.className.includes("snap-skip-link") &&
-                        !target.className.includes("snap-link--mirror") &&
-                        !target.className.includes("snap-link--snapshot")) {
+                if (!target.classList.contains("snap-skip-link") &&
+                        !target.classList.contains("snap-link--mirror") &&
+                        !target.classList.contains("snap-link--snapshot")) {
                     e.preventDefault();
                     document.body.dataset.currentLink = target.href;
                 }
