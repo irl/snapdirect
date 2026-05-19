@@ -50,8 +50,11 @@ def resolve_hash(db: DbSession, hash_: str, host: str = Header(settings.LINK_DOM
             headers={"Referrer-Policy": "no-referrer"},
         )
     if host.lower().strip() != settings.API_DOMAIN:
+        target = resolve_mirror(db, link.url)
+        if not target:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         return RedirectResponse(
-            resolve_mirror(db, link.url),
+            target,
             status_code=status.HTTP_302_FOUND,
             headers={"Referrer-Policy": "no-referrer"},
         )
