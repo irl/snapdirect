@@ -248,9 +248,9 @@ class SnapshotCamera:
             article_description=self.get_attribute_value(
                 'meta[name="description"]', "content", optional=True
             ),
-            article_image=fetch_url(self.url, article_image_source)
-            if article_image_source
-            else None,
+            article_image=(
+                fetch_url(self.url, article_image_source) if article_image_source else None
+            ),
             article_image_caption=self.get_element_content(
                 self.config.article_image_caption_selector, optional=True
             ),

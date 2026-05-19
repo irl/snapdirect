@@ -14,7 +14,13 @@ router = APIRouter()
 
 
 @router.get("/api/v1/link")
-def get_link(background_tasks: BackgroundTasks, db: DbSession, auth: ApiKey, url: str, type_: str = Query(default="auto", alias="type")):
+def get_link(
+    background_tasks: BackgroundTasks,
+    db: DbSession,
+    auth: ApiKey,
+    url: str,
+    type_: str = Query(default="auto", alias="type"),
+):
     if auth and type_ in ["auto", "live", "live-short"]:
         s = db.query(Link).filter(Link.url == url, Link.pool == 0).first()
         if not s and resolve_mirror(db, url):

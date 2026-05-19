@@ -23,7 +23,9 @@ def context(auth: ApiKey, url: str = "https://www.bbc.com/russian/articles/ckgee
     if settings.ENVIRONMENT.is_debug or auth:
         ctx = SnapshotCamera(url).get_context()
         if ctx is None:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, detail="No configuration for URL")
+            raise HTTPException(
+                status.HTTP_404_NOT_FOUND, detail="No configuration for URL"
+            )
         return ctx
     raise HTTPException(status.HTTP_404_NOT_FOUND)
 
@@ -51,7 +53,12 @@ def snap(
 ):
     s = db.query(Snapshot).filter(Snapshot.url == url, Snapshot.pool == 0).first()
     if not s and config_for_url(url):
-        s = Snapshot(url=url, pool=0, snapshot_state=SnapshotState.PENDING, provider=SnapshotProvider.GOOGLE)
+        s = Snapshot(
+            url=url,
+            pool=0,
+            snapshot_state=SnapshotState.PENDING,
+            provider=SnapshotProvider.GOOGLE,
+        )
         db.add(s)
         db.commit()
         background_tasks.add_task(generate_snapshot, s.id)

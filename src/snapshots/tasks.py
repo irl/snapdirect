@@ -19,7 +19,9 @@ def generate_snapshot(id_: int) -> None:
             return
         try:
             content = SnapshotCamera(snapshot.url).render()
-            upload_blob(hashids.encode(snapshot.id) + ".html", content.encode("utf-8"), "text/html")
+            upload_blob(
+                hashids.encode(snapshot.id) + ".html", content.encode("utf-8"), "text/html"
+            )
             snapshot.snapshot_state = SnapshotState.UPDATING
             snapshot.snapshot_published_at = datetime.now()
             db.commit()
