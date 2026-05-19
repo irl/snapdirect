@@ -24,7 +24,7 @@
         <link rel="icon" href="{{ site_favicon }}" />
     {% endif %}
     <style>
-{{ article_css() }}
+{{ article_css() | safe }}
     </style>
 
     <script type="text/javascript">
@@ -124,7 +124,7 @@
                 </figure>
             {% endif %}
             <div class="snap-content">
-                {{ article_body }}
+                {{ article_body | safe }}
                 {% if article_mirror_url %}
                 <p>
                     <a href="{{ article_mirror_url }}" class="snap-footer-link snap-link--mirror">

@@ -286,7 +286,7 @@ class SnapshotCamera:
                 package_path="templates",
             ),
             extensions=["jinja2.ext.i18n"],
-            autoescape=select_autoescape(),
+            autoescape=True,
             trim_blocks=True,
             lstrip_blocks=True,
         )
