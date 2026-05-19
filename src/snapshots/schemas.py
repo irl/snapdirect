@@ -17,7 +17,7 @@ class SnapshotContext(BaseModel):
     page_direction: str | None = None
     page_language: str | None = None
     site_favicon: str | None = None
-    site_logo: str = None
+    site_logo: str | None = None
     site_title: str
     site_mirror_url: str | None = None
     site_url: str
