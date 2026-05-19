@@ -24,6 +24,6 @@ def generate_snapshot(id_: int) -> None:
             snapshot.snapshot_published_at = datetime.now()
             db.commit()
         except Exception as e:
-            logging.error(e)
+            logging.exception("Failed to generate snapshot %s", id_)
             snapshot.snapshot_state = SnapshotState.FAILED
             db.commit()
