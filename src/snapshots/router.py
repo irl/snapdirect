@@ -21,7 +21,10 @@ router = APIRouter()
 )
 def context(auth: ApiKey, url: str = "https://www.bbc.com/russian/articles/ckgeey4dqgxo"):
     if settings.ENVIRONMENT.is_debug or auth:
-        return SnapshotCamera(url).get_context()
+        ctx = SnapshotCamera(url).get_context()
+        if ctx is None:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, detail="No configuration for URL")
+        return ctx
     raise HTTPException(status.HTTP_404_NOT_FOUND)
 
 
@@ -33,7 +36,7 @@ def context(auth: ApiKey, url: str = "https://www.bbc.com/russian/articles/ckgee
 def parse(auth: ApiKey, url: str = "https://www.bbc.com/russian/articles/ckgeey4dqgxo"):
     if settings.ENVIRONMENT.is_debug or auth:
         return SnapshotCamera(url).render()
-    raise HTTPException(status.HTTP_404_NOT_FOUND)
+    raise HTTPException(status.HTTP_403_FORBIDDEN)
 
 
 @router.get(
@@ -54,4 +57,4 @@ def snap(
         background_tasks.add_task(generate_snapshot, s.id)
     if s:
         return {"url": s.link}
-    return status.HTTP_403_FORBIDDEN
+    raise HTTPException(status.HTTP_404_NOT_FOUND)
