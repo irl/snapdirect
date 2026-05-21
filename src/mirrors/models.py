@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import Mapped, mapped_column
 
 from src.models import CustomBase, IdMixin
 
@@ -14,4 +14,4 @@ class Mirror(CustomBase, IdMixin):
     first_seen: Mapped[datetime]
     last_seen: Mapped[datetime]
     # TODO: Record hits when a redirect goes to the mirror
-    hits: Mapped[int] = 0
+    hits: Mapped[int] = mapped_column(default=0)
