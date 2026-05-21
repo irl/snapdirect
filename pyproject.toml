@@ -48,5 +48,5 @@ line-length = 92
 asyncio_default_fixture_loop_scope = "module"
 
 [tool.ruff]
-target-version = "py314"
+target-version = "py313"
 line-length = 92
