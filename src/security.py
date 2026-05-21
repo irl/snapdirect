@@ -8,6 +8,8 @@ from src.config import settings
 
 
 def api_key(host: str = Header(), authorization: str | None = Header(None)) -> bool:
+    # This function deliberately does not throw an exception in the case of unauthenticated use as there are public
+    # endpoints that need to optionally be authenticated.
     if host.lower().strip() != settings.API_DOMAIN.strip():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     try:
