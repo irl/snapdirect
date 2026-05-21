@@ -162,13 +162,17 @@ class SnapshotCamera:
             for element in body.select(", ".join(self.config.article_body_remove_selector)):
                 element.decompose()
         for image in body.select("img"):
-            image.attrs = {
-                "src": fetch_url(
-                    pangea_expanded_image_url(self.url),
-                    image.get("src", image.get("data-src", "")),
-                ),
-                "alt": image.get("alt", ""),
-            }
+            img_src = fetch_url(
+                pangea_expanded_image_url(self.url),
+                image.get("src", image.get("data-src", ""))
+            )
+            if img_src:
+                image.attrs = {
+                    "src": img_src,
+                    "alt": image.get("alt", ""),
+                }
+            else:
+                image.decompose()
         with get_db_session() as db:
             for hyperlink in body.select("a"):
                 absolute_url = urljoin(self.url, hyperlink.get("href"))
