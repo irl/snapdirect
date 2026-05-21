@@ -29,7 +29,7 @@ app.include_router(mirrors_router)
 
 @app.get("/")
 def home(host: str = Header(settings.LINK_DOMAIN)):
-    if host.lower().strip() != settings.API_DOMAIN:
+    if host.lower().strip() != settings.API_DOMAIN.lower():
         return RedirectResponse(
             settings.INVALID_URL,
             status_code=status.HTTP_302_FOUND,
