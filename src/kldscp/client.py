@@ -44,6 +44,6 @@ def get_kaleidoscope_mirror(origin: str) -> str | None:
     if response.status_code == 200:
         try:
             return response.json()["upstream"]
-        except KeyError:
+        except (KeyError, requests.exceptions.JSONDecodeError):
             return None
     return None
